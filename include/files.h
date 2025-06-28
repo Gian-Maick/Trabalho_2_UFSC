@@ -1,6 +1,6 @@
 #ifndef FILES_H
 #define FILES_H
-#include "types.h"
+#include "utils.h"
 
 //Prototipo JOGADORES
 salvar_jogadores_arquivo_bin(string nome_arq, no_jogadores_t );

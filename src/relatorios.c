@@ -30,7 +30,7 @@ void mostrar_todos_jogadores(no_jogadores_t* ptr_lista)
 void mostrar_jogo(no_jogos_t* dado)
 {
     //Mostra todos os jogos cadastrados
-    int i = 0:
+    int i = 0;
     printf("\n--- Jogo %d ---\n", i+1);
     printf("Adversario...: %s\n", dado->jogo.time_adv);
     printf("Data.........: %s\n", dado->jogo.data_jogo);
@@ -79,7 +79,86 @@ void faixa_etaria(no_jogadores_t* lista, int min, int max)
     
 }
 
-void jogadores_vendidos(string motivo);
-void mostrar_resultado_jogos();
-void mostrar_valor_time();
-void mostrar_aproveitamento();
+void jogadores_vendidos(no_jogadores_t* lista, string motivo)
+{
+    int qtd_vendidos = 0;
+    while(lista) {
+        if(strcasecmp(lista->jogador.motivo, "vendido") == 0) {
+            printf("Jogador.........................: %s\n", lista->jogador.nome);
+            printf("Idade...........................: %i\n", lista->jogador.idade);
+            printf("Altura..........................: %.2f\n", lista->jogador.altura);
+            printf("Peso............................: %.2f\n", lista->jogador.peso);
+            printf("Posicao(oes)....................: %s\n", lista->jogador.posicao);
+            printf("Valor de venda..................: %.2f\n", lista->jogador.valor_passe);
+            printf("Valor de aquisicao..............: %.2f\n", lista->jogador.aquisicao);
+            printf("Salario.........................: %.2f\n", lista->jogador.salario);
+            printf("Estado..........................: %d\n", lista->jogador.atividade);
+            printf("Motivo da inativiade............: %s\n", lista->jogador.motivo);
+            printf("\n");
+            qtd_vendidos++;
+        }
+        lista = lista->proximo;
+    }
+    printf("Quantidade de jogadores vendidos: %d\n\n", qtd_vendidos);
+}
+
+void mostrar_resultado_jogos(no_jogos_t* lista)
+{
+    //Mostra todos o resultados dos jogos
+    printf("Resultados dos Jogos\n");
+    while (lista) {
+        printf("%s: %d X %d\n", lista->jogo.time_adv, lista->jogo.resultado, lista->jogo.resultado_adv);
+        lista = lista->proximo;
+    }
+    printf("\n");
+}
+
+void mostrar_valor_time(no_jogadores_t* lista)
+{
+    float total = 0;
+    int ativos = 0, vendidos = 0;
+    
+    while (lista) {
+        if (lista->jogador.atividade == 1) {
+            total += lista->jogador.valor_passe;
+            ativos++;
+        } else if (lista->jogador.atividade == 0 && strcasecmp(lista->jogador.motivo, "Vendido") == 0) {
+            total += lista->jogador.valor_passe;
+            vendidos++;
+        }
+        lista = lista->proximo;
+    }
+
+    printf("\n--- Valor do Time ---\n");
+    printf("Jogadores Ativos..: %d\n", ativos);
+    printf("Jogadores Vendidos: %d\n", vendidos);
+    printf("Valor Total.......: R$ %.2f\n\n", total);
+}
+
+void mostrar_aproveitamento(no_jogos_t* lista)
+{
+    int vitoria = 0;
+    int derrota = 0;
+    int empate = 0;
+    float result;
+
+    while (lista) {
+        if(lista->jogo.resultado > lista->jogo.resultado_adv){
+            vitoria++;
+        }
+        else if(lista->jogo.resultado < lista->jogo.resultado_adv){
+                derrota++;
+            }   
+        else{
+            empate++;
+        }
+        
+        lista = lista->proximo;
+    }
+    result = ((float)vitoria / lista->qtd_jogos) * 100;    
+    printf("Vitorias: %d\n", vitoria);
+    printf("Empates: %d\n", empate);
+    printf("Derrotas: %d\n", derrota);
+    printf("Aproveitamento do time: %.2f%%\n", result);
+    printf("\n");
+}

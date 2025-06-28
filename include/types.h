@@ -1,7 +1,9 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-#include "utils.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 #define TM 200
 typedef char string[TM];
@@ -42,25 +44,23 @@ typedef struct cadastro_jogos {
 } dados_jogos_t;*/
 
 typedef struct no_jogadores {
-    cadastro_jogador_t jogador[TM];
+    cadastro_jogador_t jogador;
     int qtd_jogadores;
     struct no_jogadores *proximo;
 } no_jogadores_t;
 
 typedef struct no_jogos {
-    cadastro_jogos_t jogo[TM];
+    cadastro_jogos_t jogo;
     int qtd_jogos;
     struct no_jogos *proximo;
 } no_jogos_t;
 
 typedef struct lista_jogadores {
     no_jogadores_t *cabeca;
-    int nr_nos;
 } lista_jogadores_t;
 
 typedef struct lista_jogos {
     no_jogos_t *cabeca;
-    int nr_nos;
 } lista_jogos_t;
 
 

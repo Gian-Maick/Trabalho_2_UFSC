@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "types.h"
 
 void apaga_enter(string str);
 void limpar_tela();

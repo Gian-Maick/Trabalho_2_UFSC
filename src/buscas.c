@@ -17,6 +17,7 @@ void busca_nome(no_jogadores_t* lista, string nome)
             printf("Motivo da inativiade............: %s\n", lista->jogador.motivo);
             printf("\n");
             achou = 1;
+            lista = lista->proximo;
         }
     }
     if (achou == 0) {
@@ -43,6 +44,7 @@ void busca_posicao(no_jogadores_t* lista, string posicao)
             printf("Motivo da inativiade............: %s\n", lista->jogador.motivo);
             printf("\n");
             achou = 1;
+            lista = lista->proximo;
         }
 
     }
@@ -67,16 +69,16 @@ void maior_salario(no_jogadores_t* lista)
         lista = lista->proximo;
     }
 
-    printf("Jogador.........................: %s\n", aux->jogadores.jogador.nome);
-    printf("Idade...........................: %i\n", aux->jogadores.jogador.idade);
-    printf("Altura..........................: %.2f\n", aux->jogadores.jogador.altura);
-    printf("Peso............................: %.2f\n", aux->jogadores.jogador.peso);
-    printf("Posicao(oes)....................: %s\n", aux->jogadores.jogador.posicao);
-    printf("Valor de venda..................: %.2f\n", aux->jogadores.jogador.valor_passe);
-    printf("Valor de aquisicao..............: %.2f\n", aux->jogadores.jogador.aquisicao);
-    printf("Salario.........................: %.2f\n", aux->jogadores.jogador.salario);
-    printf("Estado..........................: %d\n", aux->jogadores.jogador.atividade);
-    printf("Motivo da inativiade............: %s\n", aux->jogadores.jogador.motivo);
+    printf("Jogador.........................: %s\n", aux->jogador.nome);
+    printf("Idade...........................: %i\n", aux->jogador.idade);
+    printf("Altura..........................: %.2f\n", aux->jogador.altura);
+    printf("Peso............................: %.2f\n", aux->jogador.peso);
+    printf("Posicao(oes)....................: %s\n", aux->jogador.posicao);
+    printf("Valor de venda..................: %.2f\n", aux->jogador.valor_passe);
+    printf("Valor de aquisicao..............: %.2f\n", aux->jogador.aquisicao);
+    printf("Salario.........................: %.2f\n", aux->jogador.salario);
+    printf("Estado..........................: %d\n", aux->jogador.atividade);
+    printf("Motivo da inativiade............: %s\n", aux->jogador.motivo);
     printf("\n");
 }
 
@@ -96,16 +98,16 @@ void menor_salario(no_jogadores_t* lista)
         lista = lista->proximo;
     }
 
-    printf("Jogador.........................: %s\n", aux->jogadores.jogador.nome);
-    printf("Idade...........................: %i\n", aux->jogadores.jogador.idade);
-    printf("Altura..........................: %.2f\n", aux->jogadores.jogador.altura);
-    printf("Peso............................: %.2f\n", aux->jogadores.jogador.peso);
-    printf("Posicao(oes)....................: %s\n", aux->jogadores.jogador.posicao);
-    printf("Valor de venda..................: %.2f\n", aux->jogadores.jogador.valor_passe);
-    printf("Valor de aquisicao..............: %.2f\n", aux->jogadores.jogador.aquisicao);
-    printf("Salario.........................: %.2f\n", aux->jogadores.jogador.salario);
-    printf("Estado..........................: %d\n", aux->jogadores.jogador.atividade);
-    printf("Motivo da inativiade............: %s\n", aux->jogadores.jogador.motivo);
+    printf("Jogador.........................: %s\n", aux->jogador.nome);
+    printf("Idade...........................: %i\n", aux->jogador.idade);
+    printf("Altura..........................: %.2f\n", aux->jogador.altura);
+    printf("Peso............................: %.2f\n", aux->jogador.peso);
+    printf("Posicao(oes)....................: %s\n", aux->jogador.posicao);
+    printf("Valor de venda..................: %.2f\n", aux->jogador.valor_passe);
+    printf("Valor de aquisicao..............: %.2f\n", aux->jogador.aquisicao);
+    printf("Salario.........................: %.2f\n", aux->jogador.salario);
+    printf("Estado..........................: %d\n", aux->jogador.atividade);
+    printf("Motivo da inativiade............: %s\n", aux->jogador.motivo);
     printf("\n");
 }
 
@@ -127,6 +129,7 @@ void faixa_salarial(no_jogadores_t* lista, float min, float max)
             printf("Motivo da inativiade............: %s\n", lista->jogador.motivo);
             printf("\n");
             achou = 1;
+            lista = lista->proximo;
         }
     }
     if (achou == 0) {
@@ -134,4 +137,14 @@ void faixa_salarial(no_jogadores_t* lista, float min, float max)
     }
 }
 
-void mostrar_confrontos();
+void mostrar_confrontos(no_jogos_t* lista, string nome)
+{
+    printf("Confrontos contra %s\n", nome);
+    while(lista) { 
+        if(strcasecmp(lista->jogo.time_adv, nome) == 0) { //compara as strings
+            printf("Data: %s | Resultado: %d X %d\n", lista->jogo.data_jogo, lista->jogo.resultado, lista->jogo.resultado_adv);
+        }
+        lista = lista->proximo;
+    }
+    printf("\n");
+}

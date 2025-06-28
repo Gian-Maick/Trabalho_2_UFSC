@@ -1,10 +1,11 @@
 #ifndef MENUS_H
 #define MENUS_H
-#include "types.h"
+#include "utils.h"
 
 int menu_principal();
-int menu_cadastro_jogos();
-int menu_cadastro_jogadores();
+int menu_cadastros();
+int menu_relatorios();
+int menu_buscas();
 
 
 

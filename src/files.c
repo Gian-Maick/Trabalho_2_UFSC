@@ -1,5 +1,5 @@
 #include "../include/files.h"
-
+/*
 //Implementação JOGADORES
 salvar_jogadores_arquivo_bin(string nome_arq, no_jogadores_t )
 {
@@ -16,7 +16,7 @@ salvar_jogadores_arquivo_bin(string nome_arq, no_jogadores_t )
 
     // Salvar dados para o arquivo binário
     while () {
-        fwrite(ptr_lista_rh, sizeof(no_jogadores_t), 1, fp);
+        fwrite(ptr_lista, sizeof(no_jogadores_t), 1, fp);
          = ->proximo;
     }
 
@@ -46,7 +46,7 @@ exportar_arquivo_jogadores_txt(string nome_arq, no_jogadores_t )
     fprintf(fp, "Lista de Jogos\n");
     fprintf(fp, "----------------\n\n");
 
-    while(lista_rh) {
+    while(lista) {
        
         
         
@@ -117,4 +117,4 @@ exportar_arquivo_jogos_txt(string nome_arq, no_jogos_t)
     fclose(fp); 
 }
 
-
+*/
