@@ -1,0 +1,7 @@
+Recadastramento de jogadores
+Submenu
+retirar o qtd_partidas
+vender jogadores
+corrigir jogares escalados max 11 + reservas
+excluir jogador (talvez?)
+perguntar pro sor se RAM é a mesma coisa de heap
