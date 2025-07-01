@@ -11,6 +11,7 @@ typedef enum {ATIVO = 1, INATIVO = 0} status_t;
 
  //Structs 
 typedef struct cadastro_jogador {
+    int codigo;
     string nome;                            
     int idade;
     float altura;
@@ -29,6 +30,7 @@ typedef struct cadastro_jogador {
 } dados_jogador_t;*/
 
 typedef struct cadastro_jogos {
+    int codigo;
     string time_adv;
     string data_jogo;
     string local;
@@ -57,10 +59,12 @@ typedef struct no_jogos {
 
 typedef struct lista_jogadores {
     no_jogadores_t *cabeca;
+    int qtd_nos;
 } lista_jogadores_t;
 
 typedef struct lista_jogos {
     no_jogos_t *cabeca;
+    int qtd_nos;
 } lista_jogos_t;
 
 

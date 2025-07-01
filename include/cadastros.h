@@ -4,11 +4,15 @@
 #include "utils.h"
 bool lista_jogadores_vazia(no_jogadores_t* lista);
 bool lista_jogos_vazia(no_jogos_t* lista);
+void inicializa_lista_jogadores(lista_jogadores_t *lista);
+void inicializa_lista_jogos(lista_jogos_t *lista);
+no_jogadores_t *acha_ultimo_jogadores(no_jogadores_t* lista);
+no_jogos_t *acha_ultimo_jogos(no_jogos_t* lista);
 no_jogadores_t *cadastrar_jogador();
-void insere_cadastro_inicio_jogadores(no_jogadores_t *novo, lista_jogadores_t *lista_rh);
-void recadrastrar_jogador(no_jogadores_t* lista, string nome);
+void insere_cadastro_fim_jogadores(no_jogadores_t *novo, lista_jogadores_t *lista);
+void recadastrar_jogador(no_jogadores_t* lista, int codigo);
 no_jogos_t *cadastrar_jogo();
-void insere_cadastro_inicio_jogos(no_jogos_t *novo, lista_jogos_t *lista_rh);
+void insere_cadastro_fim_jogos(no_jogos_t *novo, lista_jogos_t *lista);
 
 
 #endif

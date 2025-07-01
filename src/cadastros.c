@@ -14,6 +14,36 @@ bool lista_jogos_vazia(no_jogos_t* lista)
     return true;
 }
 
+void inicializa_lista_jogadores(lista_jogadores_t *lista)
+{
+    lista->cabeca = NULL;
+    lista->qtd_nos = 0;
+}
+
+void inicializa_lista_jogos(lista_jogos_t *lista)
+{
+    lista->cabeca = NULL;
+    lista->qtd_nos = 0;
+}
+
+no_jogadores_t *acha_ultimo_jogadores(no_jogadores_t* lista)
+{
+    while (lista->proximo) {
+        lista = lista->proximo;
+    }
+
+    return lista;
+}
+
+no_jogos_t *acha_ultimo_jogos(no_jogos_t* lista)
+{
+    while (lista->proximo) {
+        lista = lista->proximo;
+    }
+
+    return lista;
+}
+
 no_jogadores_t *cadastrar_jogador()
 {
     //cadastra um jogador
@@ -21,8 +51,9 @@ no_jogadores_t *cadastrar_jogador()
 
     novo = (no_jogadores_t*)malloc(sizeof(no_jogadores_t));
 
-     if (!novo) return NULL;
+    if (!novo) return NULL;
 
+    novo->jogador.codigo = 0;
     printf("Digite o nome do jogador: ");
     fgets(novo->jogador.nome, TM, stdin);
     apaga_enter(novo->jogador.nome);
@@ -46,25 +77,27 @@ no_jogadores_t *cadastrar_jogador()
     if (novo->jogador.atividade = ATIVO) {
         strcpy(novo->jogador.motivo, "Jogador ativo");
     }
+   
     novo->qtd_jogadores++;
 
     return novo;
 }
 
-void insere_cadastro_inicio_jogadores(no_jogadores_t *novo, lista_jogadores_t *lista_rh)
+void insere_cadastro_fim_jogadores(no_jogadores_t *novo, lista_jogadores_t *lista)
 {
+    no_jogadores_t *ultimo;
     // Define o codigo
+    novo->jogador.codigo = ++lista->qtd_nos;
 
-    if (lista_jogadores_vazia(lista_rh->cabeca)) {
-        lista_rh->cabeca = novo;
+    if (lista_jogadores_vazia(lista->cabeca)) {
+        lista->cabeca = novo;
         return;
     }
-
-    novo->proximo = lista_rh->cabeca;
-    lista_rh->cabeca = novo;
+    ultimo = acha_ultimo_jogadores(lista->cabeca);
+    ultimo->proximo = novo;
 }
 
-void recadrastrar_jogador(no_jogadores_t* lista, string nome)
+void recadastrar_jogador(no_jogadores_t* lista, int codigo)
 {
 
 }
@@ -98,21 +131,23 @@ no_jogos_t *cadastrar_jogo()
     printf("Digite o numero de substituicoes: ");
     scanf("%d", &novo->jogo.substituicoes);
 
-    novo->qtd_jogos++;
-
     return novo;
 }
 
-void insere_cadastro_inicio_jogos(no_jogos_t *novo, lista_jogos_t *lista_rh)
+void insere_cadastro_fim_jogos(no_jogos_t *novo, lista_jogos_t *lista)
 {
-    // Define o codigo
+    no_jogos_t *ultimo;
+    novo->jogo.codigo = ++lista->qtd_nos;
+    novo->qtd_jogos++;
 
-    if (lista_jogos_vazia(lista_rh->cabeca)) {
-        lista_rh->cabeca = novo;
+    if (lista_jogos_vazia(lista->cabeca)) {
+        lista->cabeca = novo;
         return;
     }
 
-    novo->proximo = lista_rh->cabeca;
-    lista_rh->cabeca = novo;
+    ultimo = acha_ultimo_jogos(lista->cabeca);
+    ultimo->proximo = novo;
+    //novo->proximo = lista->cabeca;
+    //lista->cabeca = novo;
 }
 

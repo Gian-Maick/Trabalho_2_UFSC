@@ -34,6 +34,9 @@ int main()
     string nome_jogador, posicao_jogador;
     float salario_min, salario_max;
 
+    inicializa_lista_jogadores(&lista_jogadores);
+    inicializa_lista_jogos(&lista_jogos);
+
     do {
         sub_menu = menu_principal();
         switch (sub_menu)
@@ -45,11 +48,11 @@ int main()
                     switch (opc)
                     {
                         case 1: aux_jogadores = cadastrar_jogador();
-                            insere_cadastro_inicio_jogadores(aux_jogadores, &lista_jogadores);
+                            insere_cadastro_fim_jogadores(aux_jogadores, &lista_jogadores);
                                 break;
 
                         case 2: aux_jogos = cadastrar_jogo();
-                            insere_cadastro_inicio_jogos(aux_jogos, &lista_jogos);
+                            insere_cadastro_fim_jogos(aux_jogos, &lista_jogos);
                                 break;
 
                         case 3:
@@ -73,7 +76,23 @@ int main()
                         case 2: mostrar_todos_jogos(lista_jogos.cabeca);
                                 break;
 
-                        case 3:
+                        case 3: printf("Digite a idade minima: \n");
+                                scanf("%d", &idade_min);
+                                printf("Digite a idade maxima: \n");
+                                scanf("%d", &idade_max);
+                                faixa_etaria(lista_jogadores.cabeca, idade_min, idade_max);
+                                break;
+
+                        case 4: jogadores_vendidos(lista_jogadores.cabeca);
+                                break;
+
+                        case 5: mostrar_resultado_jogos(lista_jogos.cabeca);
+                                break;
+
+                        case 6: mostrar_valor_time(lista_jogadores.cabeca);
+                                break;
+
+                        case 7: mostrar_aproveitamento(lista_jogos.cabeca);
                                 break;
                             
                         case 0: break;      
@@ -83,7 +102,43 @@ int main()
 
                     break;
 
-            case 3:
+            case 3: 
+                do {
+                    opc = menu_buscas();
+
+                    switch (opc) {
+                        case 1: printf("Digite o nome do jogador a ser buscado: \n");
+                                fgets(nome_jogador, TM, stdin);
+                                busca_nome(lista_jogadores.cabeca, nome_jogador);
+                                break;
+
+                        case 2: mostrar_todos_jogos(lista_jogos.cabeca);
+                                break;
+
+                        case 3: printf("Digite a idade minima: \n");
+                                scanf("%d", &idade_min);
+                                getchar();
+                                printf("Digite a idade maxima: \n");
+                                scanf("%d", &idade_max);
+                                getchar();
+                                printf("\n");
+                                faixa_etaria(lista_jogadores.cabeca, idade_min, idade_max);
+                                break;
+
+                        case 4: jogadores_vendidos(lista_jogadores.cabeca);
+                                break;
+
+                        case 5: mostrar_resultado_jogos(lista_jogos.cabeca);
+                                break;
+
+                        case 6: mostrar_valor_time(lista_jogadores.cabeca);
+                                break;
+
+                        case 0: break;
+                    }
+
+                } while (opc != 0);
+
                     break;
 
             case 4:

@@ -5,6 +5,7 @@ void busca_nome(no_jogadores_t* lista, string nome)
      int achou = 0;
     while (lista) {
         if(strcasestr(lista->jogador.nome, nome) != 0) {//Identifica o se há algo dentro de outra string
+            printf("Codigo do jogador...............: %i\n", lista->jogador.codigo);
             printf("Jogador.........................: %s\n", lista->jogador.nome);
             printf("Idade...........................: %i\n", lista->jogador.idade);
             printf("Altura..........................: %.2f\n", lista->jogador.altura);
@@ -32,6 +33,7 @@ void busca_posicao(no_jogadores_t* lista, string posicao)
     while (lista) {
 
         if(strcasestr(lista->jogador.posicao, posicao) != 0) {
+            printf("Codigo do jogador...............: %i\n", lista->jogador.codigo);
             printf("Jogador.........................: %s\n", lista->jogador.nome);
             printf("Idade...........................: %i\n", lista->jogador.idade);
             printf("Altura..........................: %.2f\n", lista->jogador.altura);
@@ -69,6 +71,7 @@ void maior_salario(no_jogadores_t* lista)
         lista = lista->proximo;
     }
 
+    printf("Codigo do jogador...............: %i\n", aux->jogador.codigo);
     printf("Jogador.........................: %s\n", aux->jogador.nome);
     printf("Idade...........................: %i\n", aux->jogador.idade);
     printf("Altura..........................: %.2f\n", aux->jogador.altura);
@@ -98,6 +101,7 @@ void menor_salario(no_jogadores_t* lista)
         lista = lista->proximo;
     }
 
+    printf("Codigo do jogador...............: %i\n", aux->jogador.codigo);
     printf("Jogador.........................: %s\n", aux->jogador.nome);
     printf("Idade...........................: %i\n", aux->jogador.idade);
     printf("Altura..........................: %.2f\n", aux->jogador.altura);
@@ -117,6 +121,7 @@ void faixa_salarial(no_jogadores_t* lista, float min, float max)
 
     while (lista) {
         if(lista->jogador.salario >= min && lista->jogador.salario <= max) {
+            printf("Codigo do jogador...............: %i\n", lista->jogador.codigo);
             printf("Jogador.........................: %s\n", lista->jogador.nome);
             printf("Idade...........................: %i\n", lista->jogador.idade);
             printf("Altura..........................: %.2f\n", lista->jogador.altura);
