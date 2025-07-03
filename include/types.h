@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #define TM 200
 typedef char string[TM];
@@ -47,13 +48,11 @@ typedef struct cadastro_jogos {
 
 typedef struct no_jogadores {
     cadastro_jogador_t jogador;
-    int qtd_jogadores;
     struct no_jogadores *proximo;
 } no_jogadores_t;
 
 typedef struct no_jogos {
     cadastro_jogos_t jogo;
-    int qtd_jogos;
     struct no_jogos *proximo;
 } no_jogos_t;
 

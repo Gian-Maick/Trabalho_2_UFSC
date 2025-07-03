@@ -11,6 +11,6 @@ void faixa_etaria(no_jogadores_t* lista, int min, int max);
 void jogadores_vendidos(no_jogadores_t* lista);
 void mostrar_resultado_jogos(no_jogos_t* lista);
 void mostrar_valor_time(no_jogadores_t* lista);
-void mostrar_aproveitamento(no_jogos_t* lista);
+void mostrar_aproveitamento(no_jogos_t* lista, lista_jogos_t* ptr_lista);
 
 #endif

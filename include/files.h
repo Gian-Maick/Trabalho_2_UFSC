@@ -3,16 +3,17 @@
 #include "utils.h"
 
 //Prototipo JOGADORES
-salvar_jogadores_arquivo_bin(string nome_arq, no_jogadores_t );
-ler_jogadores_arquivo_binario(string nome_arq, no_jogadores_t );
-salvar_jogadores_arquivo_html(string nome_arq, no_jogadores_t );
-salvar_jogadores_arquivo_txt(string nome_arq, no_jogadores_t );
+void salvar_jogadores_arquivo_bin(string nome_arq, no_jogadores_t *registro_jogadores);
+void ler_jogadores_arquivo_binario(string nome_arq, no_jogadores_t *lista_jogadores, lista_jogadores_t* lista);
+void exportar_Jogadores_arquivo_html(string nome_arq, no_jogadores_t *lista_jogadores);
+void exportar_arquivo_jogadores_txt(string nome_arq, no_jogadores_t *lista_jogadores);
+void exportar_dados_para_arquivo_csv_jogadores(string nome_arq, no_jogadores_t *lista_jogadores);
 
 //Pototipo JOGOS
-salvar_jogos_arquivo_bin(string nome_arq, no_jogos_t );
-ler_jogos_arquivo_binario(string nome_arq, no_jogos_t );
-salvar_jogos_arquivo_html(string nome_arq, no_jogos_t );
-salvar_jogos_arquivo_txt(string nome_arq, no_jogos_t );
-
+void salvar_jogos_arquivo_bin(string nome_arq, no_jogos_t *registro_jogos);
+void ler_jogos_arquivo_binario(string nome_arq, no_jogos_t *lista_jogos, lista_jogos_t *lista);
+void exportar_Jogos_arquivo_html(string nome_arq, no_jogos_t *lista_jogos);
+void exportar_arquivo_jogos_txt(string nome_arq, no_jogos_t *lista_jogos);
+void exportar_dados_para_arquivo_csv_jogos(string nome_arq, no_jogos_t *lista_jogos);
 
 #endif

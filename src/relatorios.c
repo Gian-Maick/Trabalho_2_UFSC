@@ -12,7 +12,7 @@ void mostrar_jogador(no_jogadores_t* dado)
     printf("Valor de venda..................: %.2f\n", dado->jogador.valor_passe);
     printf("Valor de aquisicao..............: %.2f\n", dado->jogador.aquisicao);
     printf("Salario.........................: %.2f\n", dado->jogador.salario);
-    printf("Estado..........................: %d\n", dado->jogador.atividade);
+    printf("Atividade.......................: %d\n", dado->jogador.atividade);
     printf("Motivo da inativiade............: %s\n", dado->jogador.motivo);
 
     printf("\n");
@@ -56,6 +56,7 @@ void mostrar_todos_jogos(no_jogos_t* ptr_lista)
 void faixa_etaria(no_jogadores_t* lista, int min, int max)
 {
     int achou = 0;
+    printf("\n");
     while(lista) {
         
         if(lista->jogador.idade >= min && lista->jogador.idade <= max) {
@@ -85,6 +86,7 @@ void faixa_etaria(no_jogadores_t* lista, int min, int max)
 void jogadores_vendidos(no_jogadores_t* lista)
 {
     int qtd_vendidos = 0;
+    printf("\n");
     while(lista) {
         if(strcasecmp(lista->jogador.motivo, "vendido") == 0) {
             printf("Codigo do jogador...............: %i\n", lista->jogador.codigo);
@@ -110,6 +112,7 @@ void jogadores_vendidos(no_jogadores_t* lista)
 
 void mostrar_resultado_jogos(no_jogos_t* lista)
 {
+    printf("\n");
     //Mostra todos o resultados dos jogos
     printf("Resultados dos Jogos\n");
     while (lista) {
@@ -125,6 +128,7 @@ void mostrar_valor_time(no_jogadores_t* lista)
 {
     float total = 0;
     int ativos = 0, vendidos = 0;
+    printf("\n");
     
     while (lista) {
         if (lista->jogador.atividade == 1) {
@@ -145,12 +149,13 @@ void mostrar_valor_time(no_jogadores_t* lista)
     msg_apertar_enter();
 }
 
-void mostrar_aproveitamento(no_jogos_t* lista)
+void mostrar_aproveitamento(no_jogos_t* lista, lista_jogos_t* ptr_lista)
 {
     int vitoria = 0;
     int derrota = 0;
     int empate = 0;
     float result;
+    printf("\n");
 
     while (lista) {
         if(lista->jogo.resultado > lista->jogo.resultado_adv){
@@ -165,7 +170,7 @@ void mostrar_aproveitamento(no_jogos_t* lista)
         
         lista = lista->proximo;
     }
-    result = ((float)vitoria / lista->qtd_jogos) * 100;    
+    result = ((float)vitoria / ptr_lista->qtd_nos) * 100;    
     printf("Vitorias: %d\n", vitoria);
     printf("Empates: %d\n", empate);
     printf("Derrotas: %d\n", derrota);
