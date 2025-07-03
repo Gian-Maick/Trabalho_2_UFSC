@@ -244,11 +244,11 @@ no_jogos_t *cadastrar_jogo(no_jogadores_t* cadastro)
 {
     //Cadastra n jogos
     no_jogos_t *novo; 
-    int qtd = 0, codigo;
-    no_jogadores_t *aux;
-    no_jogadores_t *mostrar = cadastro;
+    int qtd = 0, codigo, i = 0, achou = 0;
+    no_jogadores_t *aux = cadastro;
+    no_jogadores_t *mostrar;
+    int cadastrado[14];
     
-    aux = (no_jogadores_t*)malloc(sizeof(no_jogadores_t));
     novo = (no_jogos_t*)malloc(sizeof(no_jogos_t));
 
     if (!novo) return NULL;
@@ -273,7 +273,10 @@ no_jogos_t *cadastrar_jogo(no_jogadores_t* cadastro)
     getchar();
     printf("\n");
 
-    while (aux || qtd < 14) {
+    
+    while (aux || qtd < 3) {
+        limpar_tela();
+        mostrar = cadastro;
         while (mostrar) {
             if (mostrar->jogador.atividade == 1) {
                 printf("Codigo do jogador...............: %i\n", mostrar->jogador.codigo);
@@ -285,26 +288,45 @@ no_jogos_t *cadastrar_jogo(no_jogadores_t* cadastro)
             }
             mostrar = mostrar->proximo;
         }
+        printf("Jogadores escalados ate agora: %s\n\n", novo->jogo.time_escalado);
+        printf("Digite o codigo do jogador a escalar: \n");
+        scanf("%d", &codigo);
+        getchar();
+        
 
-    printf("Digite o codigo do jogador a escalar: ");
-    scanf("%d", &codigo);
-    getchar();
-    if (codigo == aux->jogador.codigo) {
-        if (strlen(novo->jogo.time_escalado) == 0) {
-            strcpy(novo->jogo.time_escalado, aux->jogador.nome);
-            aux = aux->proximo;
-            qtd++;
+        for (i = 0; i < 7; i++) {
+            if (cadastrado[i] == aux->jogador.codigo) {
+                printf("jogador ja escalado.\n");
+                break;
+            }
         }
-        else {
-            strcat(novo->jogo.time_escalado, ", ");
-            strcat(novo->jogo.time_escalado, aux->jogador.nome);
-            aux = aux->proximo;
-            qtd++;
+
+            if (codigo == aux->jogador.codigo) {
+                if (aux->jogador.atividade == 1) {
+                    if (strlen(novo->jogo.time_escalado) == 0) {
+                        strcpy(novo->jogo.time_escalado, aux->jogador.nome);
+                        qtd++;
+                        cadastrado[qtd] = aux->jogador.codigo;
+                        achou = 1;
+                    }
+                    else {
+                        strcat(novo->jogo.time_escalado, ", ");
+                        strcat(novo->jogo.time_escalado, aux->jogador.nome);
+                        qtd++;
+                        cadastrado[qtd] = aux->jogador.codigo;
+                        achou = 1;
+                    }
+                }
+                else {
+                    printf("Jogador indisponivel\n");
+                }
+                
+                aux = aux->proximo;
+            }
+            
+        if (achou == 0) {
+            printf("Nenhum jogador com este codigo encontrado\n\n");
         }
-    }
-    else {
-        printf("Nenhum jogador com este codigo encontrado\n");
-    }
     
     }
     printf("\n");

@@ -10,6 +10,7 @@
 void apaga_enter(string str);
 void limpar_tela();
 void msg_apertar_enter();
+void abre_arquivo_csv(string nome_arq);
 
 
 #endif

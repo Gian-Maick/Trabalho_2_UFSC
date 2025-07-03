@@ -31,7 +31,7 @@ int main()
     no_jogos_t *aux_jogos;
     
     int opc, opc_arq, opc_rela, sub_menu, idade_min, idade_max, codigo_jogador;
-    string nome_jogador, posicao_jogador, nome_adversario;
+    string nome_jogador, posicao_jogador, nome_adversario, nome_arq;
     float salario_min, salario_max;
 
     inicializa_lista_jogadores(&lista_jogadores);
@@ -121,31 +121,59 @@ int main()
                         case 2: do {
                                     opc_rela = menu_relatorios_csv();
                                     switch (opc_rela) {
-                                        case 1: mostrar_todos_jogadores(lista_jogadores.cabeca);
+                                        case 1: printf("Qual nome deseja dar ao arquivo?\n");
+                                                fgets(nome_arq, TM, stdin);
+                                                apaga_enter(nome_arq);
+                                                exportar_dados_para_arquivo_csv_jogadores(nome_arq, lista_jogadores.cabeca);
+                                                abre_arquivo_csv(nome_arq);
                                                 break;
 
-                                        case 2: mostrar_todos_jogos(lista_jogos.cabeca);
+                                        case 2: printf("Qual nome deseja dar ao arquivo?\n");
+                                                fgets(nome_arq, TM, stdin);
+                                                apaga_enter(nome_arq);
+                                                exportar_dados_para_arquivo_csv_jogos(nome_arq, lista_jogos.cabeca);
+                                                abre_arquivo_csv(nome_arq);
                                                 break;
 
-                                        case 3: printf("Digite a idade minima: \n");
+                                        case 3: printf("Qual nome deseja dar ao arquivo?\n");
+                                                fgets(nome_arq, TM, stdin);
+                                                apaga_enter(nome_arq);
+                                                printf("Digite a idade minima: \n");
                                                 scanf("%d", &idade_min);
                                                 getchar();
                                                 printf("Digite a idade maxima: \n");
                                                 scanf("%d", &idade_max);
                                                 getchar();
-                                                faixa_etaria(lista_jogadores.cabeca, idade_min, idade_max);
+                                                exportar_faixa_etaria_csv_jogadores(nome_arq, lista_jogadores.cabeca, idade_min, idade_max);
+                                                abre_arquivo_csv(nome_arq);
                                                 break;
 
-                                        case 4: jogadores_vendidos(lista_jogadores.cabeca);
+                                        case 4: printf("Qual nome deseja dar ao arquivo?\n");
+                                                fgets(nome_arq, TM, stdin);
+                                                apaga_enter(nome_arq);
+                                                exportar_jogadores_vendidos_csv(nome_arq, lista_jogadores.cabeca);
+                                                abre_arquivo_csv(nome_arq);
                                                 break;
 
-                                        case 5: mostrar_resultado_jogos(lista_jogos.cabeca);
+                                        case 5: printf("Qual nome deseja dar ao arquivo?\n");
+                                                fgets(nome_arq, TM, stdin);
+                                                apaga_enter(nome_arq);
+                                                exportar_dados_resultados_csv_jogos(nome_arq, lista_jogos.cabeca);
+                                                abre_arquivo_csv(nome_arq);
                                                 break;
 
-                                        case 6: mostrar_valor_time(lista_jogadores.cabeca);
+                                        case 6: printf("Qual nome deseja dar ao arquivo?\n");
+                                                fgets(nome_arq, TM, stdin);
+                                                apaga_enter(nome_arq);
+                                                exportar_dados_valor_time_csv(nome_arq, lista_jogadores.cabeca);
+                                                abre_arquivo_csv(nome_arq);
                                                 break;
 
-                                        case 7: mostrar_aproveitamento(lista_jogos.cabeca, &lista_jogos);
+                                        case 7: printf("Qual nome deseja dar ao arquivo?\n");
+                                                fgets(nome_arq, TM, stdin);
+                                                apaga_enter(nome_arq);
+                                                exportar_dados_aproveitamento_csv_jogos(nome_arq, lista_jogos.cabeca, &lista_jogos);
+                                                abre_arquivo_csv(nome_arq);
                                                 break;
                                             
                                         case 0: break;      

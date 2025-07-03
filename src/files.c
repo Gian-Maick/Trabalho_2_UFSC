@@ -83,9 +83,17 @@ void exportar_arquivo_jogadores_txt(string nome_arq, no_jogadores_t *lista_jogad
     fprintf(fp, "----------------\n\n");
 
     while(lista_jogadores) {
-       
-        
-        
+        fprintf(fp, "%i;", lista_jogadores->jogador.codigo);
+        fprintf(fp, "%s;", lista_jogadores->jogador.nome);
+        fprintf(fp, "%d;", lista_jogadores->jogador.idade);
+        fprintf(fp, "%.2f;", lista_jogadores->jogador.altura);
+        fprintf(fp, "%.2f;", lista_jogadores->jogador.peso);
+        fprintf(fp, "%s;", lista_jogadores->jogador.posicao);
+        fprintf(fp, "%.2f;", lista_jogadores->jogador.valor_passe);
+        fprintf(fp, "%.2f;", lista_jogadores->jogador.aquisicao);
+        fprintf(fp, "%.2f;", lista_jogadores->jogador.salario);
+        fprintf(fp, "%d;", lista_jogadores->jogador.atividade);
+        fprintf(fp, "%s;", lista_jogadores->jogador.motivo);
         fprintf(fp, "\n");
         
         lista_jogadores = lista_jogadores->proximo;
@@ -96,6 +104,7 @@ void exportar_arquivo_jogadores_txt(string nome_arq, no_jogadores_t *lista_jogad
 
 void exportar_dados_para_arquivo_csv_jogadores(string nome_arq, no_jogadores_t *lista_jogadores)
 {
+    strcat(nome_arq, ".csv");
     FILE *fp = fopen(nome_arq, "w");
 
     if (fp == NULL){
@@ -109,14 +118,15 @@ void exportar_dados_para_arquivo_csv_jogadores(string nome_arq, no_jogadores_t *
         fprintf(fp, "%i;", lista_jogadores->jogador.codigo);
         fprintf(fp, "%s;", lista_jogadores->jogador.nome);
         fprintf(fp, "%d;", lista_jogadores->jogador.idade);
-        fprintf(fp, "%f;", lista_jogadores->jogador.altura);
-        fprintf(fp, "%f;", lista_jogadores->jogador.peso);
+        fprintf(fp, "%.2f;", lista_jogadores->jogador.altura);
+        fprintf(fp, "%.2f;", lista_jogadores->jogador.peso);
         fprintf(fp, "%s;", lista_jogadores->jogador.posicao);
-        fprintf(fp, "%f;", lista_jogadores->jogador.valor_passe);
-        fprintf(fp, "%f;", lista_jogadores->jogador.aquisicao);
-        fprintf(fp, "%f;", lista_jogadores->jogador.salario);
+        fprintf(fp, "R$ %.2f;", lista_jogadores->jogador.valor_passe);
+        fprintf(fp, "R$ %.2f;", lista_jogadores->jogador.aquisicao);
+        fprintf(fp, "R$ %.2f;", lista_jogadores->jogador.salario);
         fprintf(fp, "%d;", lista_jogadores->jogador.atividade);
         fprintf(fp, "%s;", lista_jogadores->jogador.motivo);
+        fprintf(fp, "\n");
        
         
         lista_jogadores = lista_jogadores->proximo;
@@ -124,6 +134,107 @@ void exportar_dados_para_arquivo_csv_jogadores(string nome_arq, no_jogadores_t *
 
     fclose(fp); 
 
+}
+
+void exportar_faixa_etaria_csv_jogadores(string nome_arq, no_jogadores_t *lista_jogadores, int min, int max)
+{
+    strcat(nome_arq, ".csv");
+    FILE *fp = fopen(nome_arq, "w");
+
+    if (fp == NULL){
+        printf("erro ao abrir o arquivo %s\n", nome_arq);
+        return;
+    }
+    
+    fprintf(fp, "CODIGO;NOME;IDADE;ALTURA;PESO;POSICAO;VALOR VENDA;VALOR AQUISICAO;SALARIO;ATIVIDADE;MOTIVO\n");
+
+    while(lista_jogadores) {
+        if (lista_jogadores->jogador.idade >= min && lista_jogadores->jogador.idade <= max) {
+            fprintf(fp, "%i;", lista_jogadores->jogador.codigo);
+            fprintf(fp, "%s;", lista_jogadores->jogador.nome);
+            fprintf(fp, "%d;", lista_jogadores->jogador.idade);
+            fprintf(fp, "%.2f;", lista_jogadores->jogador.altura);
+            fprintf(fp, "%.2f;", lista_jogadores->jogador.peso);
+            fprintf(fp, "%s;", lista_jogadores->jogador.posicao);
+            fprintf(fp, "R$ %.2f;", lista_jogadores->jogador.valor_passe);
+            fprintf(fp, "R$ %.2f;", lista_jogadores->jogador.aquisicao);
+            fprintf(fp, "R$ %.2f;", lista_jogadores->jogador.salario);
+            fprintf(fp, "%d;", lista_jogadores->jogador.atividade);
+            fprintf(fp, "%s;", lista_jogadores->jogador.motivo);
+            fprintf(fp, "\n");
+        }
+        
+        lista_jogadores = lista_jogadores->proximo;
+    }    
+
+    fclose(fp); 
+}
+
+void exportar_jogadores_vendidos_csv(string nome_arq, no_jogadores_t *lista_jogadores)
+{
+    strcat(nome_arq, ".csv");
+    FILE *fp = fopen(nome_arq, "w");
+
+    if (fp == NULL){
+        printf("erro ao abrir o arquivo %s\n", nome_arq);
+        return;
+    }
+    
+    fprintf(fp, "CODIGO;NOME;IDADE;ALTURA;PESO;POSICAO;VALOR VENDA;VALOR AQUISICAO;SALARIO;ATIVIDADE;MOTIVO\n");
+
+    while(lista_jogadores) {
+        if (strcasecmp(lista_jogadores->jogador.motivo, "vendido") == 0) {
+            fprintf(fp, "%i;", lista_jogadores->jogador.codigo);
+            fprintf(fp, "%s;", lista_jogadores->jogador.nome);
+            fprintf(fp, "%d;", lista_jogadores->jogador.idade);
+            fprintf(fp, "%.2f;", lista_jogadores->jogador.altura);
+            fprintf(fp, "%.2f;", lista_jogadores->jogador.peso);
+            fprintf(fp, "%s;", lista_jogadores->jogador.posicao);
+            fprintf(fp, "R$ %.2f;", lista_jogadores->jogador.valor_passe);
+            fprintf(fp, "R$ %.2f;", lista_jogadores->jogador.aquisicao);
+            fprintf(fp, "R$ %.2f;", lista_jogadores->jogador.salario);
+            fprintf(fp, "%d;", lista_jogadores->jogador.atividade);
+            fprintf(fp, "%s;", lista_jogadores->jogador.motivo);
+            fprintf(fp, "\n");
+        }
+        
+        lista_jogadores = lista_jogadores->proximo;
+    }    
+
+    fclose(fp); 
+}
+
+void exportar_dados_valor_time_csv(string nome_arq, no_jogadores_t *lista_jogadores)
+{
+    strcat(nome_arq, ".csv");
+    FILE *fp = fopen(nome_arq, "w");
+    float total = 0;
+    int ativos = 0, vendidos = 0;
+
+    if (fp == NULL){
+        printf("erro ao abrir o arquivo %s\n", nome_arq);
+        return;
+    }
+    
+    fprintf(fp, "ATIVOS;VENDIDOS;VALOR TOTAL;\n");
+
+    while(lista_jogadores) {
+        if (lista_jogadores->jogador.atividade == 1) {
+            total += lista_jogadores->jogador.valor_passe;
+            ativos++;
+        } else if (lista_jogadores->jogador.atividade == 0 && strcasecmp(lista_jogadores->jogador.motivo, "Vendido") == 0) {
+            total += lista_jogadores->jogador.valor_passe;
+            vendidos++;
+        }
+
+        lista_jogadores = lista_jogadores->proximo;
+
+    }    
+    fprintf(fp, "%d", ativos);
+    fprintf(fp, "%d", vendidos);
+    fprintf(fp, "R$ %.2f", total);
+
+    fclose(fp); 
 }
 
 //Implementação JOGOS
@@ -220,6 +331,7 @@ void exportar_arquivo_jogos_txt(string nome_arq, no_jogos_t *lista_jogos)
 
 void exportar_dados_para_arquivo_csv_jogos(string nome_arq, no_jogos_t *lista_jogos)
 {
+    strcat(nome_arq, ".csv");
     FILE *fp = fopen(nome_arq, "w");
 
     if (fp == NULL){
@@ -246,3 +358,64 @@ void exportar_dados_para_arquivo_csv_jogos(string nome_arq, no_jogos_t *lista_jo
 
 }
 
+void exportar_dados_resultados_csv_jogos(string nome_arq, no_jogos_t *lista_jogos)
+{
+    strcat(nome_arq, ".csv");
+    FILE *fp = fopen(nome_arq, "w");
+
+    if (fp == NULL){
+        printf("erro ao abrir o arquivo %s\n", nome_arq);
+        return;
+    }
+    
+    fprintf(fp, "TIME ADVERSARIO;GOLS FEITOS;GOLS TOMADOS;\n");
+
+    while(lista_jogos) {
+        fprintf(fp, "%s", lista_jogos->jogo.time_adv);
+        fprintf(fp, "%d", lista_jogos->jogo.resultado);
+        fprintf(fp, "%d", lista_jogos->jogo.resultado_adv);
+        
+        lista_jogos = lista_jogos->proximo;
+    }    
+
+    fclose(fp); 
+}
+
+void exportar_dados_aproveitamento_csv_jogos(string nome_arq, no_jogos_t *lista_jogos, lista_jogos_t* ptr_lista)
+{
+    strcat(nome_arq, ".csv");
+    FILE *fp = fopen(nome_arq, "w");
+    int vitoria = 0;
+    int derrota = 0;
+    int empate = 0;
+    float result;
+
+    if (fp == NULL){
+        printf("erro ao abrir o arquivo %s\n", nome_arq);
+        return;
+    }
+    
+    fprintf(fp, "VITORIAS;EMPATES;DERROTAS;APROVEITAMENTO\n");
+
+    while(lista_jogos) {
+        if(lista_jogos->jogo.resultado > lista_jogos->jogo.resultado_adv){
+            vitoria++;
+        }
+        else if(lista_jogos->jogo.resultado < lista_jogos->jogo.resultado_adv){
+                derrota++;
+            }   
+        else{
+            empate++;
+        }
+        
+        lista_jogos = lista_jogos->proximo;
+
+        result = ((float)vitoria / ptr_lista->qtd_nos) * 100;    
+        fprintf(fp, "%d", vitoria);
+        fprintf(fp, "%d", empate);
+        fprintf(fp, "%d", derrota);
+        fprintf(fp, "%.2f%%", result);
+    }    
+
+    fclose(fp); 
+}
