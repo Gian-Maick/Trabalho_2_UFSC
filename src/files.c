@@ -59,15 +59,54 @@ void exportar_Jogadores_arquivo_html(string nome_arq, no_jogadores_t *lista_joga
         printf("Arquivo html nao encontrado");
         return;
     }
-    fprintf(fp , "<html> <body> <table> <tr> <td><h1>Codigo do Jogador</h1></td> <td><h1>Nome do Jogador</h1></td> </tr>\n");
+   fprintf(fp,
+    "<html> <body> <table border='1'>\n"
+    "<tr>"
+    "<td><h4>Codigo do Jogador</h4></td>"
+    "<td><h4>Nome do Jogador</h4></td>"
+    "<td><h4>Idade</h4></td>"
+    "<td><h4>Altura</h4></td>"
+    "<td><h4>Peso</h4></td>"
+    "<td><h4>Posição(ões)</h4></td>"
+    "<td><h4>Valor de Venda</h4></td>"
+    "<td><h4>Valor de Aquisição</h4></td>"
+    "<td><h4>Salário</h4></td>"
+    "<td><h4>Atividade</h4></td>"
+    "<td><h4>Motivo da Inatividade</h4></td>"
+    "</tr>\n");
     while(lista_jogadores){
-        fprintf(fp , "<tr> <td><p>%d</p></td> <td><p>%s</p></td> </tr>\n", lista_jogadores->jogador.codigo , lista_jogadores->jogador.nome);
+        fprintf(fp,
+        "<tr>"
+        "<td><p>%d</p></td>"     // Código do jogador
+        "<td><p>%s</p></td>"     // Nome
+        "<td><p>%d</p></td>"     // Idade
+        "<td><p>%.2f</p></td>"   // Altura
+        "<td><p>%.2f</p></td>"   // Peso
+        "<td><p>%s</p></td>"     // Posição
+        "<td><p>%.2f</p></td>"   // Valor de venda
+        "<td><p>%.2f</p></td>"   // Valor de aquisição
+        "<td><p>%.2f</p></td>"   // Salário
+        "<td><p>%d</p></td>"     // Atividade
+        "<td><p>%s</p></td>"     // Motivo da inatividade
+        "</tr>\n",
+        lista_jogadores->jogador.codigo,
+        lista_jogadores->jogador.nome,
+        lista_jogadores->jogador.idade,
+        lista_jogadores->jogador.altura,
+        lista_jogadores->jogador.peso,
+        lista_jogadores->jogador.posicao,
+        lista_jogadores->jogador.valor_passe,
+        lista_jogadores->jogador.aquisicao,
+        lista_jogadores->jogador.salario,
+        lista_jogadores->jogador.atividade,
+        lista_jogadores->jogador.motivo);
         lista_jogadores = lista_jogadores->proximo;
 
     }
     fprintf(fp , "</table> </body> </html>");
 
-    fclose(fp);
+fclose(fp);
+
 }
 
 void exportar_arquivo_jogadores_txt(string nome_arq, no_jogadores_t *lista_jogadores)
@@ -295,15 +334,45 @@ void exportar_Jogos_arquivo_html(string nome_arq, no_jogos_t *lista_jogos)
         printf("Arquivo html nao encontrado");
         return;
     }
-    fprintf(fp , "<html> <body> <table> <tr> <td><h1>Codigo da partida</h1></td> <td><h1>Time adversario</h1></td> </tr>\n");
+    fprintf(fp,
+    "<html><body><table border='1'>\n"
+    "<tr>"
+    "<td><h4>Código do Jogo</h4></td>"
+    "<td><h4>Adversário</h4></td>"
+    "<td><h4>Data</h4></td>"
+    "<td><h4>Local</h4></td>"
+    "<td><h4>Resultado</h4></td>"
+    "<td><h4>Escalados</h4></td>"
+    "<td><h4>Substituições</h4></td>"
+    "</tr>\n");
+
     while(lista_jogos){
-        fprintf(fp , "<tr> <td><p>%d</p></td> <td><p>%s</p></td> </tr>\n", lista_jogos->jogo.codigo , lista_jogos->jogo.time_adv);
+        fprintf(fp,
+        "<tr>"
+        "<td><p>%d</p></td>"               // Código do jogo
+        "<td><p>%s</p></td>"               // Adversário
+        "<td><p>%s</p></td>"               // Data
+        "<td><p>%s</p></td>"               // Local
+        "<td><p>%d X %d</p></td>"          // Resultado
+        "<td><p>%s</p></td>"               // Escalados
+        "<td><p>%d</p></td>"               // Substituições
+        "</tr>\n",
+        lista_jogos->jogo.codigo,
+        lista_jogos->jogo.time_adv,
+        lista_jogos->jogo.data_jogo,
+        lista_jogos->jogo.local,
+        lista_jogos->jogo.resultado,
+        lista_jogos->jogo.resultado_adv,
+        lista_jogos->jogo.time_escalado,
+        lista_jogos->jogo.substituicoes);
+
         lista_jogos = lista_jogos->proximo;
 
     }
     fprintf(fp , "</table> </body> </html>");
 
-    fclose(fp);
+fclose(fp);
+
 }
 
 void exportar_arquivo_jogos_txt(string nome_arq, no_jogos_t *lista_jogos)

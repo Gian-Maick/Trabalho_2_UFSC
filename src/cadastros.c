@@ -121,45 +121,45 @@ no_jogadores_t *recadastrar_jogador(no_jogadores_t* cadastro, int codigo)
 
             if (strcasecmp(recadastrar, "Sim") == 0 || strcasecmp(recadastrar, "S") == 0) {
                 printf("\n");
-                printf("Nome original: %s\n", cadastro->jogador.nome);
+                printf("Nome original: %s\n", novo->jogador.nome);
                 printf("Digite o nome do jogador: ");
                 fgets(novo->jogador.nome, TM, stdin);
                 apaga_enter(novo->jogador.nome);
                 printf("\n");
 
-                printf("Idade original: %d\n", cadastro->jogador.idade);
+                printf("Idade original: %d\n", novo->jogador.idade);
                 printf("Digite a idade do jogador: ");
                 scanf("%d", &novo->jogador.idade);
                 printf("\n");
 
-                printf("Altura original: %.2f\n", cadastro->jogador.altura);
+                printf("Altura original: %.2f\n", novo->jogador.altura);
                 printf("Digite a altura do jogador: ");
                 scanf("%f", &novo->jogador.altura);
                 printf("\n");
 
-                printf("Peso original: %.2f\n", cadastro->jogador.peso);
+                printf("Peso original: %.2f\n", novo->jogador.peso);
                 printf("Digite o peso do jogador: ");
                 scanf("%f", &novo->jogador.peso);
                 getchar();
                 printf("\n");
 
-                printf("Posicao original: %s\n", cadastro->jogador.posicao);
+                printf("Posicao original: %s\n", novo->jogador.posicao);
                 printf("Digite a posicao do jogador: ");
                 fgets(novo->jogador.posicao, TM, stdin);
                 apaga_enter(novo->jogador.posicao);
                 printf("\n");
 
-                printf("Valor original: %.2f\n", cadastro->jogador.valor_passe);
+                printf("Valor original: %.2f\n", novo->jogador.valor_passe);
                 printf("Digite o valor de venda jogador: ");
                 scanf("%f", &novo->jogador.valor_passe);
                 printf("\n");
 
-                printf("Valor original: %.2f\n", cadastro->jogador.salario);
+                printf("Valor original: %.2f\n", novo->jogador.salario);
                 printf("Digite o salario do jogador: ");
                 scanf("%f", &novo->jogador.salario);
                 printf("\n");
 
-                printf("Atividade original: %d\n", cadastro->jogador.atividade);
+                printf("Atividade original: %d\n", novo->jogador.atividade);
                 printf("Digite a atividade do jogador (ativo = 1 ou inativo = 0): ");
                 scanf("%d", &novo->jogador.atividade);
                 getchar();
@@ -274,7 +274,7 @@ no_jogos_t *cadastrar_jogo(no_jogadores_t* cadastro)
     printf("\n");
 
     
-    while (qtd < 3) {
+    while (qtd < 11) {
         limpar_tela();
         mostrar = cadastro;
         aux = cadastro;
@@ -295,7 +295,7 @@ no_jogos_t *cadastrar_jogo(no_jogadores_t* cadastro)
         scanf("%d", &codigo);
         getchar();
         int escalado = 0;
-        for (i = 0; i < 7; i++) {
+        for (i = 0; i < 11; i++) {
             if (cadastrado[i] == codigo) {
                 printf("jogador ja escalado.\n\n");
                 escalado = 1;
