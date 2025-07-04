@@ -244,10 +244,10 @@ no_jogos_t *cadastrar_jogo(no_jogadores_t* cadastro)
 {
     //Cadastra n jogos
     no_jogos_t *novo; 
-    int qtd = 0, codigo, i = 0, achou = 0;
-    no_jogadores_t *aux = cadastro;
+    int qtd = 0, codigo, i = 0, achou;
+    no_jogadores_t *aux;
     no_jogadores_t *mostrar;
-    int cadastrado[14];
+    int cadastrado[14] = {0};
     
     novo = (no_jogos_t*)malloc(sizeof(no_jogos_t));
 
@@ -274,9 +274,11 @@ no_jogos_t *cadastrar_jogo(no_jogadores_t* cadastro)
     printf("\n");
 
     
-    while (aux || qtd < 3) {
+    while (qtd < 3) {
         limpar_tela();
         mostrar = cadastro;
+        aux = cadastro;
+        achou = 0;
         while (mostrar) {
             if (mostrar->jogador.atividade == 1) {
                 printf("Codigo do jogador...............: %i\n", mostrar->jogador.codigo);
@@ -292,42 +294,50 @@ no_jogos_t *cadastrar_jogo(no_jogadores_t* cadastro)
         printf("Digite o codigo do jogador a escalar: \n");
         scanf("%d", &codigo);
         getchar();
-        
-
+        int escalado = 0;
         for (i = 0; i < 7; i++) {
-            if (cadastrado[i] == aux->jogador.codigo) {
-                printf("jogador ja escalado.\n");
+            if (cadastrado[i] == codigo) {
+                printf("jogador ja escalado.\n\n");
+                escalado = 1;
+                enter_continuar();
                 break;
             }
         }
 
-            if (codigo == aux->jogador.codigo) {
-                if (aux->jogador.atividade == 1) {
-                    if (strlen(novo->jogo.time_escalado) == 0) {
-                        strcpy(novo->jogo.time_escalado, aux->jogador.nome);
-                        qtd++;
-                        cadastrado[qtd] = aux->jogador.codigo;
-                        achou = 1;
+        if (escalado) continue;
+            
+            while (aux) {
+                if (codigo == aux->jogador.codigo) {
+                    if (aux->jogador.atividade == 1) {
+                        if (strlen(novo->jogo.time_escalado) == 0) {
+                            strcpy(novo->jogo.time_escalado, aux->jogador.nome);
+                            cadastrado[qtd] = codigo;
+                            qtd++;
+                            achou = 1;
+                        }
+                        else {
+                            strcat(novo->jogo.time_escalado, ", ");
+                            strcat(novo->jogo.time_escalado, aux->jogador.nome);
+                            cadastrado[qtd] = codigo;
+                            qtd++;
+                            achou = 1;
+                        }
                     }
                     else {
-                        strcat(novo->jogo.time_escalado, ", ");
-                        strcat(novo->jogo.time_escalado, aux->jogador.nome);
-                        qtd++;
-                        cadastrado[qtd] = aux->jogador.codigo;
+                        printf("Jogador indisponivel\n");
                         achou = 1;
+                        enter_continuar();
                     }
-                }
-                else {
-                    printf("Jogador indisponivel\n");
-                }
-                
+                    
+                }    
                 aux = aux->proximo;
             }
+        
             
         if (achou == 0) {
             printf("Nenhum jogador com este codigo encontrado\n\n");
         }
-    
+        
     }
     printf("\n");
 
@@ -354,3 +364,94 @@ void insere_cadastro_fim_jogos(no_jogos_t *novo, lista_jogos_t *lista)
     ultimo->proximo = novo;
 }
 
+void excluir_jogador(no_jogadores_t *lista, int codigo)
+{
+    no_jogadores_t *aux;
+    no_jogadores_t *jogador = lista;
+    string resposta;
+    int achou = 0;
+
+    while (jogador) {
+        if (jogador->jogador.codigo == codigo) {
+            mostrar_jogador(jogador);
+            achou = 1;
+            break;
+        }
+        jogador = jogador->proximo;
+    }
+    if (achou == 0) {
+        printf("Jogador nao encontrado");
+        msg_apertar_enter();
+        return;
+    }
+
+    printf("Deseja realmente apagar este jogador (Sim ou Nao)?\n");
+    fgets(resposta, TM, stdin);
+    apaga_enter(resposta);
+    printf("\n");
+
+    if (strcasecmp(resposta, "sim") == 0 || strcasecmp(resposta, "s") == 0) {
+        if (lista == jogador) {
+            *lista = *jogador->proximo;
+            printf("Jogador excluido.");
+            msg_apertar_enter();
+        }
+        else {
+            for (lista; lista->proximo != jogador; lista = lista->proximo);
+            lista->proximo = jogador->proximo;
+            printf("Jogador excluido.");
+            msg_apertar_enter();
+        }
+        
+    }
+    else{
+        msg_apertar_enter();
+        return;
+    }
+}
+
+void excluir_jogo(no_jogos_t *lista, int codigo)
+{
+    no_jogos_t *jogo = lista;
+    string resposta;
+    int achou = 0;
+
+    while (jogo) {
+        if (jogo->jogo.codigo == codigo) {
+            mostrar_jogo(jogo);
+            achou = 1;
+            break;
+        }
+        jogo = jogo->proximo;
+    }
+
+    if (achou == 0) {
+        printf("Jogo nao encontrado");
+        msg_apertar_enter();
+        return;
+    }
+
+    printf("Deseja realmente apagar este jogo (Sim ou Nao)?\n");
+    fgets(resposta, TM, stdin);
+    apaga_enter(resposta);
+    printf("\n");
+
+    if (strcasecmp(resposta, "sim") == 0 || strcasecmp(resposta, "s") == 0) {
+        if (lista == jogo) {
+            *lista = *jogo->proximo;
+            printf("Jogo excluido.");
+            msg_apertar_enter();
+        }
+        else{
+            for (lista; lista->proximo != jogo; lista = lista->proximo);
+            lista->proximo = jogo->proximo;
+            printf("Jogo excluido.");
+            msg_apertar_enter();
+        }
+        
+    }
+    else{
+        msg_apertar_enter();
+        return;
+    }
+}

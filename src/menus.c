@@ -32,6 +32,8 @@ int menu_cadastros()
     printf("2.Cadastrar jogo\n");
     printf("3.Recadastrar jogador\n");
     printf("4.Mudar a atividade de jogador\n");
+    printf("5.Excluir jogador\n");
+    printf("6.Excluir jogo\n");
     printf("0.Voltar ao menu principal\n");
     printf("::: ");
     scanf("%i", &opcao);

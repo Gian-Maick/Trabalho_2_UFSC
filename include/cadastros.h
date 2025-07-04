@@ -14,6 +14,8 @@ no_jogadores_t *recadastrar_jogador(no_jogadores_t* cadastro, int codigo);
 no_jogadores_t *mudar_atividade_jogador(no_jogadores_t *cadastro, int codigo);
 no_jogos_t *cadastrar_jogo(no_jogadores_t *cadastro);
 void insere_cadastro_fim_jogos(no_jogos_t *novo, lista_jogos_t *lista);
+void excluir_jogador(no_jogadores_t* lista, int codigo);
+void excluir_jogo(no_jogos_t *lista, int codigo);
 
 
 #endif

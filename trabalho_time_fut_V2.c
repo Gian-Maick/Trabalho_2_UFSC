@@ -30,7 +30,7 @@ int main()
     no_jogadores_t *aux_jogadores;
     no_jogos_t *aux_jogos;
     
-    int opc, opc_arq, opc_rela, sub_menu, idade_min, idade_max, codigo_jogador;
+    int opc, opc_arq, opc_rela, sub_menu, idade_min, idade_max, codigo_jogador, codigo_jogo;
     string nome_jogador, posicao_jogador, nome_adversario, nome_arq;
     float salario_min, salario_max;
 
@@ -51,11 +51,11 @@ int main()
                     switch (opc)
                     {
                         case 1: aux_jogadores = cadastrar_jogador();
-                            insere_cadastro_fim_jogadores(aux_jogadores, &lista_jogadores);
+                                insere_cadastro_fim_jogadores(aux_jogadores, &lista_jogadores);
                                 break;
 
                         case 2: aux_jogos = cadastrar_jogo(lista_jogadores.cabeca);
-                            insere_cadastro_fim_jogos(aux_jogos, &lista_jogos);
+                                insere_cadastro_fim_jogos(aux_jogos, &lista_jogos);
                                 break;
 
                         case 3: printf("Digite o codigo do jogador que deseja alterar: \n");
@@ -68,6 +68,20 @@ int main()
                                 scanf("%d", &codigo_jogador);
                                 getchar();
                                 mudar_atividade_jogador(lista_jogadores.cabeca, codigo_jogador);
+                                break;
+
+                        case 5: printf("Digite o codigo do jogador que deseja excluir: \n");
+                                scanf("%d", &codigo_jogador);
+                                getchar();
+                                printf("\n");
+                                excluir_jogador(lista_jogadores.cabeca, codigo_jogador);
+                                break;
+
+                        case 6: printf("Digite o numero do jogo que deseja excluir: \n");
+                                scanf("%d", &codigo_jogo);
+                                getchar();
+                                printf("\n");
+                                excluir_jogo(lista_jogos.cabeca, codigo_jogo);
                                 break;
                             
                         case 0: break;   
@@ -242,10 +256,12 @@ int main()
                                     opc_arq = menu_arquivos_jogadores();
 
                                     switch (opc_arq){
-                                        case 1:
+                                        case 1: exportar_arquivo_jogadores_txt("jogadores.txt", lista_jogadores.cabeca);
+                                                abre_arquivo_txt("jogadores.txt");
                                                 break;
 
                                         case 2: exportar_Jogadores_arquivo_html("jogadores.html", lista_jogadores.cabeca);
+                                                abre_arquivo_html("jogadores.html");
                                                 break;
 
                                         case 0:
@@ -261,9 +277,11 @@ int main()
                                     opc_arq = menu_arquivos_jogos();
                                     
                                     switch (opc_arq){
-                                        case 1: 
+                                        case 1: exportar_arquivo_jogos_txt("jogos.txt", lista_jogos.cabeca);
+                                                abre_arquivo_txt("jogos.txt");
                                                 break;
-                                        case 2: //exportar_Jogos_arquivo_html("jogos.html", lista_jogos.cabeca);
+                                        case 2: exportar_Jogos_arquivo_html("jogos.html", lista_jogos.cabeca);
+                                                abre_arquivo_html("jogos.html");
                                                 break;
                                         case 0: 
                                                 break;
@@ -289,77 +307,8 @@ int main()
         salvar_jogos_arquivo_bin("jogos.bin", lista_jogos.cabeca);
     }
 
+    apagar_lista_jogadores(&lista_jogadores.cabeca);
+    apagar_lista_jogos(&lista_jogos.cabeca);
+
     return 0;
 }
-
-
-//Implementação
-
-//Parte do Ian, todos o relatorios e busca de jogos
-
-
-
-
-
-//Aqui em baixo é só carregamento de dados e lá na func main mostra nas funcs mostrar_jogos e mostrar_jogadores
-/*
-void carregar_jogadores_txt(const char *filename) 
-{
-    FILE *file = fopen(filename, "r");
-        if (!file) 
-        {
-            printf("Arquivo %s não encontrado.\n", filename);
-            return;
-        }
-    cadastro_jogador_t temp;
-        while(fgets(temp.nome, TM, file) != NULL && jogadores.qtd_jogadores < TM)
-        {
-            temp.nome[strcspn(temp.nome, "\n")] = '\0';
-            fscanf(file, "%i\n", &temp.idade);
-            fscanf(file, "%f\n", &temp.altura);
-            fscanf(file, "%f\n", &temp.peso);
-            fgets(temp.posicao, TM, file); 
-            temp.posicao[strcspn(temp.posicao, "\n")] = '\0';
-            fscanf(file, "%f\n", &temp.valor_passe);
-            fscanf(file, "%f\n", &temp.aquisicao);
-            fscanf(file, "%f\n", &temp.salario);
-            fscanf(file, "%d\n", &temp.atividade);
-            fgets(temp.motivo, TM, file);
-            temp.motivo[strcspn(temp.motivo, "\n")] = '\0';
-            
-            //fgets(temp.atividade, TM, file);
-            //temp.atividade[strcspn(temp.atividade, "\n")] = '\0';
-            
-            jogadores.jogador[jogadores.qtd_jogadores++] = temp;
-        }
-        fclose(file);
-}
-
-void carregar_jogos_txt(const char *filename)
-{
-    FILE *file = fopen(filename, "r");
-        if (!file) 
-        {
-            printf("Arquivo %s não encontrado.\n", filename);
-            return;
-        } 
-    cadastro_jogos_t temp;
-        while (fgets(temp.time_adv, TM, file) != NULL && jogos.qtd_jogos < TM) 
-        {
-            temp.time_adv[strcspn(temp.time_adv, "\n")] = '\0';
-            fgets(temp.data_jogo, TM, file); 
-            temp.data_jogo[strcspn(temp.data_jogo, "\n")] = '\0';
-            fgets(temp.local, TM, file); 
-            temp.local[strcspn(temp.local, "\n")] = '\0';
-            fscanf(file, "%d\n", &temp.resultado);
-            fscanf(file, "%d\n", &temp.resultado_adv);
-            fgets(temp.time_escalado, TM, file); 
-            temp.time_escalado[strcspn(temp.time_escalado, "\n")] = '\0';
-            fscanf(file, "%d\n", &temp.substituicoes);
-
-            jogos.jogo[jogos.qtd_jogos++] = temp;
-        }
-
-        fclose(file);
-}
-*/

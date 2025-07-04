@@ -1,0 +1,30 @@
+Lista de Partidas
+-------------------
+
+Codigo: 1
+Time adversario: sdwa
+Data: 22/05/2000
+Local: asdsad
+Gols marcados: 2
+Gols tomados: 1
+Time escalado: sdsasad, ewfrefef, dvrefre
+Substituicoes: 2
+
+Codigo: 2
+Time adversario: sdsad
+Data: sadsa
+Local: asdsad
+Gols marcados: 2
+Gols tomados: 1
+Time escalado: sdsasad, ewfrefef, dvrefre
+Substituicoes: 2
+
+Codigo: 3
+Time adversario: sadfe
+Data: 2131
+Local: erfre
+Gols marcados: 1
+Gols tomados: 2
+Time escalado: sdsasad, ewfrefef, joao
+Substituicoes: 5
+

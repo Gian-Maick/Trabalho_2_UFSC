@@ -1,7 +1,7 @@
 CODIGO;NOME;IDADE;ALTURA;PESO;POSICAO;VALOR VENDA;VALOR AQUISICAO;SALARIO;ATIVIDADE;MOTIVO
 1;sdsasad;23213;21321.00;21321.00;dscrfef;R$ 312321.00;R$ 21321.00;R$ 21321.00;1;Jogador ativo;
 2;ewfrefef;321321;21312.00;2132.00;fvefv;R$ 3213.00;R$ 213.00;R$ 2131.00;1;Jogador ativo;
-3;dvrefre;23123;1231.00;12321.00;dwfew;R$ 23213.00;R$ 2132.00;R$ 21321.00;0;vendido;
 4;joao;22;1.80;99.00;meia;R$ 2000.00;R$ 5000.00;R$ 1500.00;1;Jogador ativo;
 5;antonio;34;1.76;78.00;atacante;R$ 4000.00;R$ 2000.00;R$ 3000.00;1;Jogador ativo;
 6;roberto;24;1.70;76.00;goleiro;R$ 7000.00;R$ 5000.00;R$ 2000.00;0;lesionado;
+7;roberto carlos;22;1.80;67.00;atacante;R$ 5000.00;R$ 9000.00;R$ 15000.00;1;Jogador ativo;
